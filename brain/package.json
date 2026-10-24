@@ -1,0 +1,15 @@
+{
+  "name": "snc-r1-brain",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Straight & Curly R1 Console brain (runs on the Mac, read-only)",
+  "main": "brain.mjs",
+  "scripts": {
+    "start": "node brain.mjs"
+  },
+  "dependencies": {
+    "imapflow": "^1.0.164",
+    "playwright": "^1.48.0"
+  }
+}
