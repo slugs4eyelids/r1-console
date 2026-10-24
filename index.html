@@ -354,7 +354,14 @@
 
   // ---------- Boot ----------
   (async function boot() {
-    const fromUrl = new URLSearchParams(location.search).get("api");
+    // Where the brain lives: ?api= in the address, else config.json next to this page, else what was saved before.
+    let fromUrl = new URLSearchParams(location.search).get("api");
+    if (!fromUrl) {
+      try {
+        const cfg = await fetch("config.json", { cache: "no-store" }).then((r) => (r.ok ? r.json() : null));
+        if (cfg && cfg.api) fromUrl = cfg.api;
+      } catch (e) {}
+    }
     if (fromUrl) { api = fromUrl.replace(/\/+$/, ""); await store.set("api", api); }
     else api = await store.get("api");
 

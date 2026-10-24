@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install SC Console</title>
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+         background: #fff; color: #111; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; text-align: center; padding: 24px; }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  p { color: #555; margin: 0 0 20px; font-size: 15px; }
+  img { width: 320px; height: 320px; image-rendering: pixelated; }
+  code { display: block; margin-top: 16px; font-size: 12px; color: #888; word-break: break-all; max-width: 420px; }
+</style>
+</head>
+<body>
+  <h1>Install SC Console on your R1</h1>
+  <p>Creations card → add via QR code, then scan this.</p>
+  <img id="qr" alt="Install QR code">
+  <code id="payload"></code>
+  <script>
+    const base = location.href.replace(/qr\.html.*$/, "");
+    const payload = JSON.stringify({
+      title: "SC Console",
+      url: base + "index.html",
+      description: "Straight and Curly sales, orders, stock and inbox. Hold the side button to ask Claude.",
+      iconUrl: base + "icon.png",
+      themeColor: "#EB0C00"
+    });
+    document.getElementById("payload").textContent = payload;
+    document.getElementById("qr").src =
+      "https://api.qrserver.com/v1/create-qr-code/?size=640x640&margin=16&data=" + encodeURIComponent(payload);
+  </script>
+</body>
+</html>

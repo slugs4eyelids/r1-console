@@ -157,8 +157,9 @@ else
 fi
 
 # Install QR for the R1 (creations card -> add via QR code)
-APP_URL="${PAGES}?api=https://$NGROK_DOMAIN"
-QR_JSON=$(node -e 'console.log(JSON.stringify({title:"S&C Console",url:process.argv[1],description:"Straight & Curly sales, orders, stock and inbox. Hold the side button to ask Claude.",iconUrl:process.argv[2]+"icon.png",themeColor:"#EB0C00"}))' "$APP_URL" "$PAGES")
+APP_URL="${PAGES}index.html"
+echo "Your brain address: https://$NGROK_DOMAIN  (it goes in config.json in the r1-console repo)"
+QR_JSON=$(node -e 'console.log(JSON.stringify({title:"SC Console",url:process.argv[1],description:"Straight and Curly sales, orders, stock and inbox. Hold the side button to ask Claude.",iconUrl:process.argv[2]+"icon.png",themeColor:"#EB0C00"}))' "$APP_URL" "$PAGES")
 qrencode -s 10 -m 2 -o "$DATA/install-qr.png" "$QR_JSON"
 bold "Done. Scan this with your R1: creations card → add via QR code"
 qrencode -t ANSIUTF8 "$QR_JSON"
